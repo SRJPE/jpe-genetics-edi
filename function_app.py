@@ -106,6 +106,21 @@ class pastaPackage:
             new_revision_number = int(package_id_parts[2]) + 1
             return f"{package_id_parts[0]}.{package_id_parts[1]}.{new_revision_number}"
 
+    def update_package_id_tag(self):
+        new_package_id = self.package_id_revision_increment()
+        eml_tag = self.soup.find("eml:eml")
+        if eml_tag:
+            eml_tag["packageId"] = new_package_id
+
+    def write_xml_to_blob(self):
+        current_id = self.get_package_id()
+        filename = f"{current_id}.xml"
+        blob_client = self.blob_service_client.get_blob_client(
+            container=self.container, blob=filename
+        )
+        xml_content = str(self.soup)
+        blob_client.upload_blob(xml_content, overwrite=True)
+
 
 class simpleEML:
     def __init__(self, url):
