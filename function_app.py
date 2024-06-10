@@ -133,10 +133,9 @@ class simpleEML:
 @app.route(route="fetch-data")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("reading the base xml file")
-    try:
-        xml_base = simpleEML(BASE_XML_URL)
-    except Exception as e:
-        logging.error(e.__str__())
+    conn_string = os.getenv("AZURE_BLOB_CONN_STRING") or "dev-string"
+    p = pastePackage("edi-1617", conn_string)
+
     logging.info("base xml read in")
     logging.info("This is a test")
     engine = create_engine(conn_string)
