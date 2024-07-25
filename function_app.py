@@ -188,9 +188,12 @@ def write_xml_to_blob(xml: BeautifulSoup, container_client: ContainerClient) -> 
 @app.function_name(name="genetics-EDI-processing")
 @app.route(route="fetch-data")
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    package_number = req.params.get("package_number", "edi-1616")
+    if package_number is None:
+        return func.HttpResponse("the package id number is not valid.", status_code=400)
     az_conn_string = os.environ["AZURE_BLOB_CONN_STRING"]
     db_conn_string = os.environ["DB_CONN_STRING"]
-    pipe = EDIPipe("edi-1616", az_conn_string, db_conn_string)
+    pipe = EDIPipe(package_number, az_conn_string, db_conn_string)
     initialize_pipe(pipe)
 
     q = read_sql_from_file("data-query.sql")
@@ -205,5 +208,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     update_eml(xml_soup, {EML_PATHS["csv_url"]: new_url})
 
-    return func.HttpResponse("EDI Pipeline Excecution Complete")
-    write_xml_to_blob(xml_soup, pipe.container_client)
+    # write_xml_to_blob(xml_soup, pipe.container_client)
+    return func.HttpResponse("EDI Pipeline Excecution Complete\n")
