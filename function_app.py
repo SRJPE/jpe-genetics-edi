@@ -185,7 +185,7 @@ def write_xml_to_blob(xml: BeautifulSoup, container_client: ContainerClient) -> 
 # get latest data
 
 
-@app.function_name(name="genetics-EDI-processing")
+@app.function_name(name="edi-pipe")
 @app.route(route="fetch-data")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     package_number = req.params.get("package_number", "edi-1616")
