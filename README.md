@@ -14,3 +14,6 @@ this creates a blob for `edi-<package-id>` within that folder two more are creat
 
 2. In order to bootstrap the process you must drop in a completed first version of the xml metadata file. You 
 have two options to create this, using the `emlaide` R package or the [ezEML Webiste](https://ezeml.edirepository.org/eml/auth/login).
+
+3. Create an sql query to will be used to pull data from the database, a connection string to the databaes is also
+needed.
