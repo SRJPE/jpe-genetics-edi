@@ -14,8 +14,6 @@ from typing import Optional, Dict
 from sqlalchemy.sql.base import Options
 from sqlalchemy.sql.lambdas import NonAnalyzedFunction
 
-app = func.FunctionApp()
-
 
 logger = logging.getLogger(__name__)
 DB_NAME = os.getenv("DB_NAME") or "runiddb"
@@ -180,17 +178,17 @@ def write_xml_to_blob(xml: BeautifulSoup, container_client: ContainerClient) -> 
     return get_url_for_xml(filename, container_client)
 
 
-# set up the container and azure blob
-
-# get latest data
+app = func.FunctionApp()
 
 
-@app.function_name(name="edi-pipe")
-@app.route(route="fetch-data")
+@app.function_name(name="edi-publish")
+@app.route(route="publish", methods=["GET", "POST"])
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    package_number = req.params.get("package_number", "edi-1616")
+    package_number = req.params.get("package_number")
     if package_number is None:
-        return func.HttpResponse("the package id number is not valid.", status_code=400)
+        return func.HttpResponse(
+            "the package id number is not valid.\n", status_code=400
+        )
     az_conn_string = os.environ["AZURE_BLOB_CONN_STRING"]
     db_conn_string = os.environ["DB_CONN_STRING"]
     pipe = EDIPipe(package_number, az_conn_string, db_conn_string)
