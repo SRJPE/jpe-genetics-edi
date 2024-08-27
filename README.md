@@ -17,3 +17,13 @@ have two options to create this, using the `emlaide` R package or the [ezEML Web
 
 3. Create an sql query to will be used to pull data from the database, a connection string to the databaes is also
 needed.
+
+From now on triggers to this function will do the following:
+
+1. Obtain latest published revision number.
+2. Obtain latest xml published via Azure Storage.
+3. Create new xml based on this and embed new revision number.
+4. Use sql query to pull latest data, store in azure blob and obtain this url.
+5. Store url in the xml file. 
+6. Publish new xml package via updated xml file.
+
