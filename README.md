@@ -11,3 +11,6 @@ curl https://edi-workflows.azurewebsites.net/api/publish?package_number=edi-<you
 ```
 
 this creates a blob for `edi-<package-id>` within that folder two more are created a `data` and an `xml` one.
+
+2. In order to bootstrap the process you must drop in a completed first version of the xml metadata file. You 
+have two options to create this, using the `emlaide` R package or the [ezEML Webiste](https://ezeml.edirepository.org/eml/auth/login).
