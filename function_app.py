@@ -1,18 +1,20 @@
 from io import StringIO
-from xml.etree.ElementTree import XML, XMLParser
 import azure.functions as func
 import logging
 import os
-from sqlalchemy import create_engine, Engine, over, text
+from sqlalchemy import create_engine, Engine
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
-from azure.storage.blob import BlobServiceClient, ContainerClient, PublicAccess
+from azure.storage.blob import (
+    BlobServiceClient,
+    ContainerClient,
+    PublicAccess,
+    _blob_service_client,
+)
 from dataclasses import dataclass, field
 from typing import Optional, Dict
-
-from sqlalchemy.sql.base import Options
-from sqlalchemy.sql.lambdas import NonAnalyzedFunction
+import json
 
 
 logger = logging.getLogger(__name__)
@@ -204,7 +206,90 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     xml_url = get_url_for_xml(xmls[0].name, pipe.container_client)
     xml_soup = parse_xml_from_url(xml_url)
 
-    update_eml(xml_soup, {EML_PATHS["csv_url"]: new_url})
+    # update_eml(xml_soup, {EML_PATHS["csv_url"]: new_url})
 
     # write_xml_to_blob(xml_soup, pipe.container_client)
     return func.HttpResponse("EDI Pipeline Excecution Complete\n")
+
+
+@app.function_name(name="edi-update")
+@app.route(route="update", methods=["POST"])
+def update(req: func.HttpRequest) -> func.HttpResponse:
+    try:
+        data = req.get_json()
+    except ValueError:
+        return func.HttpResponse("invalid input", status_code=400)
+
+    package_id = data.get("package_id")
+    if package_id is None:
+        return func.HttpResponse("package_id is required", status_code=400)
+
+    return func.HttpResponse("done", status_code=200)
+
+
+@app.function_name(name="edi-init")
+@app.route(route="init", methods=["POST"])
+def init_package(req: func.HttpRequest) -> func.HttpResponse:
+    logger.info("RUNNING in the edi function")
+    try:
+        data = req.get_json()
+        package_id = data.get("package_id")
+        blob_conn_string = data.get("blob_conn_string")
+    except ValueError:
+        return func.HttpResponse("invalid input.\n", status_code=400)
+
+    if package_id is None:
+        return func.HttpResponse("need a package id to init", status_code=400)
+
+    if blob_conn_string is None:
+        return func.HttpResponse(
+            "need an azure connection blob string to continue\n", status_code=400
+        )
+
+    blob_service_client = BlobServiceClient.from_connection_string(blob_conn_string)
+    package_name = f"edi-package-{package_id}"
+    container_client = blob_service_client.get_container_client(package_name)
+    if container_client.exists():
+        return func.HttpResponse(
+            "the package you are trying to init already exists!\n", status_code=400
+        )
+
+    container_client = blob_service_client.create_container(package_name)
+    logger.info(f"created new container for package: {package_name}")
+    # create the folders for xml and data
+    xml_blob_client = container_client.get_blob_client("xml/")
+    xml_blob_client.upload_blob(data="", overwrite=True)
+    data_blob_client = container_client.get_blob_client("data/")
+    data_blob_client.upload_blob(data="", overwrite=True)
+
+    return func.HttpResponse("hello this is working\n")
+
+
+@app.function_name(name="edi-details")
+@app.route(route="details", methods=["GET"])
+def package_details(req: func.HttpRequest) -> func.HttpResponse:
+    try:
+        data = req.get_json()
+    except ValueError:
+        return func.HttpResponse("invalid input", status_code=400)
+
+    package_id = data.get("package_id")
+    blob_conn_string = data.get("blob_conn_string")
+
+    if package_id is None:
+        return func.HttpResponse("need package id", status_code=400)
+
+    container_name = f"edi-package-{package_id}"
+    blob_service_client = BlobServiceClient.from_connection_string(blob_conn_string)
+    container_client = blob_service_client.get_container_client(container_name)
+    if not container_client.exists():
+        return func.HttpResponse("package id was not found", status_code=400)
+
+    items_in_xml_folder = container_client.list_blobs(name_starts_with="xml/")
+    items_in_data_folder = container_client.list_blobs(name_starts_with="data/")
+    response_data = {
+        "xml": [blob.name for blob in items_in_xml_folder],
+        "data": [blob.name for blob in items_in_data_folder],
+    }
+
+    return func.HttpResponse(json.dumps(response_data))
