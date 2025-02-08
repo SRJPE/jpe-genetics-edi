@@ -2,7 +2,7 @@ from io import StringIO
 import azure.functions as func
 import logging
 import os
-from sqlalchemy import create_engine, Engine
+from sqlalchemy import all_, create_engine, Engine
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
@@ -14,6 +14,8 @@ from azure.storage.blob import (
 from dataclasses import dataclass, field
 from typing import Optional, Dict
 import json
+import psycopg2
+from psycopg2 import sql
 
 
 logger = logging.getLogger(__name__)
@@ -183,10 +185,13 @@ app = func.FunctionApp()
 
 
 def az_get_latest_xml_handle(container_client):
-    all_xmls = list(container_client.list_blobs(name_starts_with="xml/"))
-    sorted_xmls = sorted(all_xmls, key=lambda x: x.get("name"), reverse=True)
-    blob_handle = container_client.get_blob_client(sorted_xmls[0])
-    return blob_handle
+    all_blobs = list(container_client.list_blobs(name_starts_with="xml/"))
+    if len(all_blobs):
+        all_xmls = [x for x in all_blobs if x.get("name").endswith("xml")]
+        sorted_xmls = sorted(all_xmls, key=lambda x: x.get("name"), reverse=True)
+        blob_handle = container_client.get_blob_client(sorted_xmls[0])
+        return blob_handle
+    return None
 
 
 def az_get_queries_handles(container_client):
@@ -262,6 +267,12 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     if conn_str is None:
         return func.HttpResponse("blob connection string is required", status_code=400)
 
+    db_conn_str = data.get("db_conn_string")
+    if db_conn_str is None:
+        return func.HttpResponse(
+            "database connection string is required", status_code=400
+        )
+
     package_name = f"edi-package-{package_id}"
     blob_cl = BlobServiceClient.from_connection_string(conn_str)
     container_cl = blob_cl.get_container_client(package_name)
@@ -281,12 +292,21 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
 
     # get all queries
     all_query_handles = az_get_queries_handles(container_cl)
+    all_qs = [x.download_blob().readall().decode("utf-8") for x in all_query_handles]
+    all_data_results = []
 
-    # connect to database
-
-    # execture all queries
+    # TODO: check that this works
+    # connect to database and execture all queries
+    with psycopg2.connect(db_conn_str) as conn:
+        with conn.cursor() as cur:
+            for q in all_qs:
+                sql_q = sql.SQL(q)
+                cur.execute(q)
+                d = cur.fetchall()
+                all_data_results.append(d)
 
     # write back to blob keeping url for data
+    blob_cl.get_blob_client(name_starts_with="data/")
 
     return func.HttpResponse("done", status_code=200)
 
@@ -326,7 +346,7 @@ def init_package(req: func.HttpRequest) -> func.HttpResponse:
     data_blob_client = container_client.get_blob_client("data/")
     data_blob_client.upload_blob(data="", overwrite=True)
 
-    return func.HttpResponse("hello this is working\n")
+    return func.HttpResponse("package initialization complete!\n")
 
 
 @app.function_name(name="edi-details")
