@@ -10,7 +10,6 @@ from azure.storage.blob import (
     BlobServiceClient,
     ContainerClient,
     PublicAccess,
-    _blob_service_client,
 )
 from dataclasses import dataclass, field
 from typing import Optional, Dict
@@ -183,6 +182,41 @@ def write_xml_to_blob(xml: BeautifulSoup, container_client: ContainerClient) -> 
 app = func.FunctionApp()
 
 
+def az_get_latest_xml_handle(container_client):
+    all_xmls = list(container_client.list_blobs(name_starts_with="xml/"))
+    sorted_xmls = sorted(all_xmls, key=lambda x: x.get("name"), reverse=True)
+    blob_handle = container_client.get_blob_client(sorted_xmls[0])
+    return blob_handle
+
+
+def az_get_queries_handles(container_client):
+    all_query_files = list(container_client.list_blobs(name_starts_with="queries/"))
+    all_query_names = [x.get("name") for x in all_query_files]
+    all_handles = [container_client.get_blob_client(x) for x in all_query_names]
+    return all_handles
+
+
+def xml_update_package_id(soup, package_id):
+    eml = soup.find("eml:eml")
+    if eml is None:
+        raise ValueError("could not find eml root node")
+    eml["packageId"] = package_id
+    return soup
+
+
+def pasta_get_latest_revision(id: str, scope: str = "edi"):
+    url = f"https://pasta.lternet.edu/package/eml/{scope}/{id}"
+    resp = requests.get(url)
+
+    if resp.status_code == 200:
+        all_revisions = [
+            int(revision.strip())
+            for revision in resp.text.split("\n")
+            if revision.strip()
+        ]
+        return max(all_revisions)
+
+
 @app.function_name(name="edi-publish")
 @app.route(route="publish", methods=["GET", "POST"])
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -223,6 +257,36 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     package_id = data.get("package_id")
     if package_id is None:
         return func.HttpResponse("package_id is required", status_code=400)
+
+    conn_str = data.get("blob_conn_string")
+    if conn_str is None:
+        return func.HttpResponse("blob connection string is required", status_code=400)
+
+    package_name = f"edi-package-{package_id}"
+    blob_cl = BlobServiceClient.from_connection_string(conn_str)
+    container_cl = blob_cl.get_container_client(package_name)
+    latest_xml = az_get_latest_xml_handle(container_cl)
+    xml_content = latest_xml.download_blob().readall()
+    soup = BeautifulSoup(xml_content.decode("utf-8"))
+    local_package_revision = int(soup.find("eml:eml")["packageId"].split("\n")[-1])
+    latest_remote_revision = pasta_get_latest_revision(package_id)
+
+    # if the blob revision number before update does not match the remote one
+    # then we have an issue to be resolved before we continue therefore we stop
+    # here and allow user to fix manually
+    if local_package_revision != latest_remote_revision:
+        raise ValueError(
+            f"the revision currently at blob = {local_package_revision} does not match the remote revision = {latest_remote_revision}"
+        )
+
+    # get all queries
+    all_query_handles = az_get_queries_handles(container_cl)
+
+    # connect to database
+
+    # execture all queries
+
+    # write back to blob keeping url for data
 
     return func.HttpResponse("done", status_code=200)
 
