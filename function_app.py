@@ -1,4 +1,5 @@
-from io import StringIO
+import enum
+from io import StringIO, BytesIO
 import azure.functions as func
 import logging
 import os
@@ -78,9 +79,6 @@ def read_sql_from_file(file_name: str):
         return f.read()
 
 
-def read_sql_from_blob(blob_path: str): ...
-
-
 def get_latest_data(db: Optional[Engine], query_statement: str):
     if db is None:
         raise Exception(
@@ -140,7 +138,6 @@ def update_eml(eml: BeautifulSoup, kv: Dict[str, str]):
             current = current.find(node)
             if current is None:
                 break
-
         if current is not None:
             current.clear()
             current.append(val)
@@ -201,6 +198,12 @@ def az_get_queries_handles(container_client):
     return all_handles
 
 
+def read_query_from_handle(handle):
+    handle_data = handle.download_blob()
+    handle_content = handle_data.content_as_text().strip()
+    return handle_content
+
+
 def xml_update_package_id(soup, package_id):
     eml = soup.find("eml:eml")
     if eml is None:
@@ -209,10 +212,19 @@ def xml_update_package_id(soup, package_id):
     return soup
 
 
+def xml_get_colnames(soup):
+    dts = soup.find_all("dataTable")
+    entity_names = [x.find("entityName").string for x in dts]
+    entity_names = [x.replace(".csv", "") for x in entity_names]
+    out = {}
+    for i, d in enumerate(dts):
+        out[entity_names[i]] = [x.string for x in d.find_all("attributeName")]
+    return out
+
+
 def pasta_get_latest_revision(id: str, scope: str = "edi"):
     url = f"https://pasta.lternet.edu/package/eml/{scope}/{id}"
     resp = requests.get(url)
-
     if resp.status_code == 200:
         all_revisions = [
             int(revision.strip())
@@ -245,9 +257,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     xml_url = get_url_for_xml(xmls[0].name, pipe.container_client)
     xml_soup = parse_xml_from_url(xml_url)
 
-    # update_eml(xml_soup, {EML_PATHS["csv_url"]: new_url})
-
-    # write_xml_to_blob(xml_soup, pipe.container_client)
     return func.HttpResponse("EDI Pipeline Excecution Complete\n")
 
 
@@ -291,22 +300,46 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # get all queries
-    all_query_handles = az_get_queries_handles(container_cl)
-    all_qs = [x.download_blob().readall().decode("utf-8") for x in all_query_handles]
-    all_data_results = []
+    query_handles = az_get_queries_handles(container_cl)
+    all_query_blob_names = [x.blob_name.split("/")[1] for x in query_handles]
+    dataset_names = [x.replace(".sql", "") for x in all_query_blob_names]
 
-    # TODO: check that this works
-    # connect to database and execture all queries
+    q_content = [read_query_from_handle(i) for i in query_handles]
+    datatables_in_xml = soup.find_all("dataTable")
+
+    # make sure datasets line up
+    if len(datatables_in_xml) != len(dataset_names):
+        raise ValueError(
+            f"the xml defines {len(datatables_in_xml)} datables but blob xml has {len(dataset_names)}, these need tom match"
+        )
+
+    all_data_results = {}
     with psycopg2.connect(db_conn_str) as conn:
         with conn.cursor() as cur:
-            for q in all_qs:
-                sql_q = sql.SQL(q)
+            for i, q in enumerate(q_content):
                 cur.execute(q)
                 d = cur.fetchall()
-                all_data_results.append(d)
+                df = pd.DataFrame(d)
+                all_data_results[dataset_names[i]] = df
 
-    # write back to blob keeping url for data
-    blob_cl.get_blob_client(name_starts_with="data/")
+    # get and set the colnames for each of the datasets
+    datsets_colnames = xml_get_colnames(soup)
+    for k, v in all_data_results.items():
+        v.columns = datsets_colnames[k]
+
+    # write datasets to blob
+    file_urls = {}
+    for k, v in all_data_results.items():
+        buffer = BytesIO()
+        v.to_csv(buffer, index=False)
+        buffer.seek(0)
+        blob_path = f"data/{k}.csv"
+        file_blob_client = container_cl.get_blob_client(blob_path)
+        file_urls[k] = file_blob_client.url
+        try:
+            file_blob_client.upload_blob(buffer.getvalue(), overwrite=True)
+        except Exception as e:
+            print(f"ERROR: {e}")
 
     return func.HttpResponse("done", status_code=200)
 
