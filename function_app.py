@@ -234,32 +234,6 @@ def pasta_get_latest_revision(id: str, scope: str = "edi"):
         return max(all_revisions)
 
 
-@app.function_name(name="edi-publish")
-@app.route(route="publish", methods=["GET", "POST"])
-def main(req: func.HttpRequest) -> func.HttpResponse:
-    package_number = req.params.get("package_number")
-    if package_number is None:
-        return func.HttpResponse(
-            "the package id number is not valid.\n", status_code=400
-        )
-    az_conn_string = os.environ["AZURE_BLOB_CONN_STRING"]
-    db_conn_string = os.environ["DB_CONN_STRING"]
-    pipe = EDIPipe(package_number, az_conn_string, db_conn_string)
-    initialize_pipe(pipe)
-
-    q = read_sql_from_file("data-query.sql")
-    data = get_latest_data(pipe.db_engine, q)
-    new_url = upload_csv_to_blob(
-        pipe.pkg_number, pipe.container_client, "genetics-data", data, overwrite=True
-    )
-
-    xmls = get_package_xmls(pipe.container_client, sort=True)
-    xml_url = get_url_for_xml(xmls[0].name, pipe.container_client)
-    xml_soup = parse_xml_from_url(xml_url)
-
-    return func.HttpResponse("EDI Pipeline Excecution Complete\n")
-
-
 @app.function_name(name="edi-update")
 @app.route(route="update", methods=["POST"])
 def update(req: func.HttpRequest) -> func.HttpResponse:
