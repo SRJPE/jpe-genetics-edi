@@ -143,12 +143,24 @@ def update_eml(eml: BeautifulSoup, kv: Dict[str, str]):
             current.append(val)
 
 
-def package_id_revision_increment(self):
-    current_package_id = self.get_package_id()
-    if current_package_id:
-        package_id_parts = current_package_id.split(".")
-        new_revision_number = int(package_id_parts[2]) + 1
-        return f"{package_id_parts[0]}.{package_id_parts[1]}.{new_revision_number}"
+def xml_package_id_revision_increment(soup: BeautifulSoup):
+    eml_base_node = soup.find("eml:eml")
+    if eml_base_node:
+        package_id = eml_base_node["packageId"]
+    else:
+        raise ValueError("unable to find eml:eml node")
+    if package_id:
+        parts = package_id.split(".")
+        if len(parts) != 3:
+            raise ValueError(f"package_id '{package_id}' is not formatted correctly")
+        else:
+            rev_part = int(parts[2])
+            rev_part += 1
+            new_version_number = f"{parts[0]}.{parts[1]}.{rev_part}"
+            eml_base_node["packageId"] = new_version_number
+            return new_version_number
+    else:
+        raise ValueError("unable to find packageId")
 
 
 def update_package_id_tag(self) -> None:
@@ -222,6 +234,27 @@ def xml_get_colnames(soup):
     return out
 
 
+def xml_update_url_for_dataset(soup: BeautifulSoup, dataset_name: str, new_url: str):
+    # find url node for dataset
+    dataset_name = f"{dataset_name}.csv"
+    target_dt_node = [
+        x
+        for x in soup.find_all("dataTable")
+        if x.find("entityName") and x.find("entityName").string == dataset_name
+    ]
+    if len(target_dt_node) != 1:
+        raise ValueError(f"dataset name '{dataset_name}' resulted in a non-unique node")
+    target_dt_node = target_dt_node[0]
+    if target_dt_node.find("url"):
+        url_node = target_dt_node.find("url")
+        url_node.string = new_url
+        return soup
+    else:
+        raise ValueError(
+            f"unable to locate target node for dataset name '{dataset_name}'"
+        )
+
+
 def pasta_get_latest_revision(id: str, scope: str = "edi"):
     url = f"https://pasta.lternet.edu/package/eml/{scope}/{id}"
     resp = requests.get(url)
@@ -260,10 +293,11 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     blob_cl = BlobServiceClient.from_connection_string(conn_str)
     container_cl = blob_cl.get_container_client(package_name)
     latest_xml = az_get_latest_xml_handle(container_cl)
-    xml_content = latest_xml.download_blob().readall()
-    soup = BeautifulSoup(xml_content.decode("utf-8"))
-    local_package_revision = int(soup.find("eml:eml")["packageId"].split("\n")[-1])
-    latest_remote_revision = pasta_get_latest_revision(package_id)
+    if latest_xml:
+        xml_content = latest_xml.download_blob().readall()
+        soup = BeautifulSoup(xml_content.decode("utf-8"))
+        local_package_revision = int(soup.find("eml:eml")["packageId"].split("\n")[-1])
+        latest_remote_revision = pasta_get_latest_revision(package_id)
 
     # if the blob revision number before update does not match the remote one
     # then we have an issue to be resolved before we continue therefore we stop
@@ -314,6 +348,19 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
             file_blob_client.upload_blob(buffer.getvalue(), overwrite=True)
         except Exception as e:
             print(f"ERROR: {e}")
+
+    # write the csv links into the xml file
+    for dataset_name, new_url in file_urls.items():
+        xml_update_url_for_dataset(soup, dataset_name=dataset_name, new_url=new_url)
+
+    # update the revision number
+    new_revision = xml_package_id_revision_increment(soup)
+
+    xml_string = str(soup)
+    xml_blob_cl = container_cl.get_blob_client(blob=f"xml/{new_revision}.xml")
+    xml_blob_cl.upload_blob(xml_string, overwrite=True)
+
+    # upload via pasta api
 
     return func.HttpResponse("done", status_code=200)
 
