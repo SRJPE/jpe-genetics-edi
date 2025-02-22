@@ -1,4 +1,3 @@
-import enum
 from io import StringIO, BytesIO
 import azure.functions as func
 import logging
@@ -267,6 +266,27 @@ def pasta_get_latest_revision(id: str, scope: str = "edi"):
         return max(all_revisions)
 
 
+def xml_update_temporal_coverage(soup: BeautifulSoup): ...
+
+
+def pasta_post_eml(username: str, password: str): ...
+
+
+def validate_update_request_data(data):
+    required_fields = {
+        "package_id": "Package ID",
+        "blob_conn_string": "Blob connection string",
+        "db_conn_string": "Database connection string",
+        "temporal_coverage_dataset": "Dataset for temporal coverage",
+        "temporal_coverage_column": "Column for temporal coverage",
+    }
+
+    for field, message in required_fields.items():
+        if data.get(field) is None:
+            return func.HttpResponse(f"{message} is required", status_code=400)
+    return None
+
+
 @app.function_name(name="edi-update")
 @app.route(route="update", methods=["POST"])
 def update(req: func.HttpRequest) -> func.HttpResponse:
@@ -275,19 +295,14 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     except ValueError:
         return func.HttpResponse("invalid input", status_code=400)
 
-    package_id = data.get("package_id")
-    if package_id is None:
-        return func.HttpResponse("package_id is required", status_code=400)
-
-    conn_str = data.get("blob_conn_string")
-    if conn_str is None:
-        return func.HttpResponse("blob connection string is required", status_code=400)
-
-    db_conn_str = data.get("db_conn_string")
-    if db_conn_str is None:
-        return func.HttpResponse(
-            "database connection string is required", status_code=400
-        )
+    errors_in_res = validate_update_request_data(data)
+    if errors_in_res:
+        return errors_in_res
+    package_id = data["package_id"]
+    conn_str = data["blob_conn_string"]
+    db_conn_str = data["db_conn_string"]
+    temporal_coverage_dataset = data["temporal_coverage_dataset"]
+    temporal_coverage_column = data["temporal_coverage_column"]
 
     package_name = f"edi-package-{package_id}"
     blob_cl = BlobServiceClient.from_connection_string(conn_str)
@@ -295,8 +310,8 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     latest_xml = az_get_latest_xml_handle(container_cl)
     if latest_xml:
         xml_content = latest_xml.download_blob().readall()
-        soup = BeautifulSoup(xml_content.decode("utf-8"))
-        local_package_revision = int(soup.find("eml:eml")["packageId"].split("\n")[-1])
+        soup = BeautifulSoup(xml_content.decode("utf-8", "lxml-xml"))
+        local_package_revision = int(soup.find("eml:eml")["packageId"].split(".")[-1])
         latest_remote_revision = pasta_get_latest_revision(package_id)
 
     # if the blob revision number before update does not match the remote one
@@ -322,12 +337,24 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     all_data_results = {}
+
+    # TODO: this is basically a draft, needs to be checked, specifically the way I check whether
+    # one date is bigger then the other and what not
+    current_max_date = (
+        soup.find("temporalCoverage").find("endDate").find("calendarDate").string
+    )
     with psycopg2.connect(db_conn_str) as conn:
         with conn.cursor() as cur:
             for i, q in enumerate(q_content):
                 cur.execute(q)
                 d = cur.fetchall()
                 df = pd.DataFrame(d)
+                if temporal_coverage_dataset == dataset_names[i]:
+                    current_max_date = (
+                        max(df[temporal_coverage_column])
+                        if max(df[temporal_coverage_column]) > current_max_date
+                        else current_max_date
+                    )
                 all_data_results[dataset_names[i]] = df
 
     # get and set the colnames for each of the datasets
@@ -355,6 +382,8 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
 
     # update the revision number
     new_revision = xml_package_id_revision_increment(soup)
+
+    # update the temporal range of the data
 
     xml_string = str(soup)
     xml_blob_cl = container_cl.get_blob_client(blob=f"xml/{new_revision}.xml")
