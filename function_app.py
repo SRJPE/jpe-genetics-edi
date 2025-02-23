@@ -16,6 +16,7 @@ from typing import Optional, Dict
 import json
 import psycopg2
 from psycopg2 import sql
+import datetime
 
 
 logger = logging.getLogger(__name__)
@@ -310,7 +311,7 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     latest_xml = az_get_latest_xml_handle(container_cl)
     if latest_xml:
         xml_content = latest_xml.download_blob().readall()
-        soup = BeautifulSoup(xml_content.decode("utf-8", "lxml-xml"))
+        soup = BeautifulSoup(xml_content, "lxml-xml")
         local_package_revision = int(soup.find("eml:eml")["packageId"].split(".")[-1])
         latest_remote_revision = pasta_get_latest_revision(package_id)
 
@@ -340,8 +341,8 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
 
     # TODO: this is basically a draft, needs to be checked, specifically the way I check whether
     # one date is bigger then the other and what not
-    current_max_date = (
-        soup.find("temporalCoverage").find("endDate").find("calendarDate").string
+    current_max_date_node = (
+        soup.find("temporalCoverage").find("endDate").find("calendarDate")
     )
     with psycopg2.connect(db_conn_str) as conn:
         with conn.cursor() as cur:
@@ -349,18 +350,19 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
                 cur.execute(q)
                 d = cur.fetchall()
                 df = pd.DataFrame(d)
-                if temporal_coverage_dataset == dataset_names[i]:
-                    current_max_date = (
-                        max(df[temporal_coverage_column])
-                        if max(df[temporal_coverage_column]) > current_max_date
-                        else current_max_date
-                    )
                 all_data_results[dataset_names[i]] = df
 
     # get and set the colnames for each of the datasets
     datsets_colnames = xml_get_colnames(soup)
     for k, v in all_data_results.items():
         v.columns = datsets_colnames[k]
+
+    current_max_date = max(
+        all_data_results[temporal_coverage_dataset][temporal_coverage_column]
+    )
+    max_datetime = datetime.datetime.strptime(current_max_date, "%Y-%m-%d %H:%M:%SZ")
+    max_date = max_datetime.strftime("%Y-%m-%d")
+    current_max_date_node.string = max_date
 
     # write datasets to blob
     file_urls = {}
