@@ -18,6 +18,7 @@ import psycopg2
 from psycopg2 import sql
 import datetime
 import pasta
+import hashlib
 
 
 logger = logging.getLogger(__name__)
@@ -268,8 +269,32 @@ def xml_update_size_for_dataset(soup: BeautifulSoup, dataset_name: str, new_size
         raise ValueError(f"dataset name '{dataset_name}' resulted in a non-unique node")
     target_dt_node = target_dt_node[0]
     if target_dt_node.find("size"):
-        url_node = target_dt_node.find("size")
-        url_node.string = new_size
+        size_node = target_dt_node.find("size")
+        logger.info(f"found tagert node for {size_node.string}")
+        size_node.string = str(new_size)
+        return soup
+    else:
+        raise ValueError(
+            f"unable to locate target node for dataset name '{dataset_name}'"
+        )
+
+
+def xml_update_checksum_for_dataset(
+    soup: BeautifulSoup, dataset_name: str, new_checksum: str
+):
+    # find url node for dataset
+    dataset_name = f"{dataset_name}.csv"
+    target_dt_node = [
+        x
+        for x in soup.find_all("dataTable")
+        if x.find("entityName") and x.find("entityName").string == dataset_name
+    ]
+    if len(target_dt_node) != 1:
+        raise ValueError(f"dataset name '{dataset_name}' resulted in a non-unique node")
+    target_dt_node = target_dt_node[0]
+    if target_dt_node.find("authentication"):
+        auth_node = target_dt_node.find("authentication")
+        auth_node.string = new_checksum
         return soup
     else:
         raise ValueError(
@@ -390,6 +415,7 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     # write datasets to blob
     file_urls = {}
     file_sizes = {}
+    file_checsums = {}
     for k, v in all_data_results.items():
         buffer = BytesIO()
         v.to_csv(buffer, index=False)
@@ -399,6 +425,9 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
         data = buffer.getvalue()
         size_bytes = len(data)
         file_sizes[k] = size_bytes
+
+        # file checksums
+        file_checsums[k] = hashlib.md5(data).hexdigest()
 
         blob_path = f"data/{k}.csv"
         file_blob_client = container_cl.get_blob_client(blob_path)
@@ -411,8 +440,14 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     # write the csv links into the xml file
     for dataset_name, new_url in file_urls.items():
         xml_update_url_for_dataset(soup, dataset_name=dataset_name, new_url=new_url)
+    # write files size
     for dataset_name, new_size in file_sizes.items():
         xml_update_size_for_dataset(soup, dataset_name=dataset_name, new_size=new_size)
+
+    for dataset_name, new_cs in file_checsums.items():
+        xml_update_checksum_for_dataset(
+            soup, dataset_name=dataset_name, new_checksum=new_cs
+        )
 
     new_revision = xml_package_id_revision_increment(soup)
     xml_string = str(soup)
