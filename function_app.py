@@ -17,6 +17,7 @@ import json
 import psycopg2
 from psycopg2 import sql
 import datetime
+import pasta
 
 
 logger = logging.getLogger(__name__)
@@ -255,6 +256,27 @@ def xml_update_url_for_dataset(soup: BeautifulSoup, dataset_name: str, new_url: 
         )
 
 
+def xml_update_size_for_dataset(soup: BeautifulSoup, dataset_name: str, new_size: int):
+    # find url node for dataset
+    dataset_name = f"{dataset_name}.csv"
+    target_dt_node = [
+        x
+        for x in soup.find_all("dataTable")
+        if x.find("entityName") and x.find("entityName").string == dataset_name
+    ]
+    if len(target_dt_node) != 1:
+        raise ValueError(f"dataset name '{dataset_name}' resulted in a non-unique node")
+    target_dt_node = target_dt_node[0]
+    if target_dt_node.find("size"):
+        url_node = target_dt_node.find("size")
+        url_node.string = new_size
+        return soup
+    else:
+        raise ValueError(
+            f"unable to locate target node for dataset name '{dataset_name}'"
+        )
+
+
 def pasta_get_latest_revision(id: str, scope: str = "edi"):
     url = f"https://pasta.lternet.edu/package/eml/{scope}/{id}"
     resp = requests.get(url)
@@ -270,9 +292,6 @@ def pasta_get_latest_revision(id: str, scope: str = "edi"):
 def xml_update_temporal_coverage(soup: BeautifulSoup): ...
 
 
-def pasta_post_eml(username: str, password: str): ...
-
-
 def validate_update_request_data(data):
     required_fields = {
         "package_id": "Package ID",
@@ -280,6 +299,8 @@ def validate_update_request_data(data):
         "db_conn_string": "Database connection string",
         "temporal_coverage_dataset": "Dataset for temporal coverage",
         "temporal_coverage_column": "Column for temporal coverage",
+        "edi_username": "EDI Username",
+        "edi_password": "EDI Password",
     }
 
     for field, message in required_fields.items():
@@ -304,6 +325,8 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     db_conn_str = data["db_conn_string"]
     temporal_coverage_dataset = data["temporal_coverage_dataset"]
     temporal_coverage_column = data["temporal_coverage_column"]
+    edi_username = data["edi_username"]
+    edi_password = data["edi_password"]
 
     package_name = f"edi-package-{package_id}"
     blob_cl = BlobServiceClient.from_connection_string(conn_str)
@@ -366,10 +389,17 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
 
     # write datasets to blob
     file_urls = {}
+    file_sizes = {}
     for k, v in all_data_results.items():
         buffer = BytesIO()
         v.to_csv(buffer, index=False)
         buffer.seek(0)
+
+        # file size stuff
+        data = buffer.getvalue()
+        size_bytes = len(data)
+        file_sizes[k] = size_bytes
+
         blob_path = f"data/{k}.csv"
         file_blob_client = container_cl.get_blob_client(blob_path)
         file_urls[k] = file_blob_client.url
@@ -381,19 +411,17 @@ def update(req: func.HttpRequest) -> func.HttpResponse:
     # write the csv links into the xml file
     for dataset_name, new_url in file_urls.items():
         xml_update_url_for_dataset(soup, dataset_name=dataset_name, new_url=new_url)
+    for dataset_name, new_size in file_sizes.items():
+        xml_update_size_for_dataset(soup, dataset_name=dataset_name, new_size=new_size)
 
-    # update the revision number
     new_revision = xml_package_id_revision_increment(soup)
-
-    # update the temporal range of the data
-
     xml_string = str(soup)
     xml_blob_cl = container_cl.get_blob_client(blob=f"xml/{new_revision}.xml")
     xml_blob_cl.upload_blob(xml_string, overwrite=True)
 
-    # upload via pasta api
+    resp = pasta.post_eml(xml_string, package_id, edi_username, edi_password)
 
-    return func.HttpResponse("done", status_code=200)
+    return func.HttpResponse(f"{str(resp.content)}", status_code=200)
 
 
 @app.function_name(name="edi-init")
