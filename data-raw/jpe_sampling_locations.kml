@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="1dvDLKQs3nz2taDKIEwsxp8_eIphTW-jN">
+	<name>SRJPE</name>
+	<gx:CascadingStyle kml:id="__managed_style_82FB7989543C88684EEC">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=66bb6a&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_7CD2B801A13C88684EEC">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=66bb6a&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_68AF5977683C88684EEC">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_7CD2B801A13C88684EEC</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_82FB7989543C88684EEC</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="__managed_style_3227181B3B3C88684EEC">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_46F9833E443C88684EEC</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_5C334CE8793C88684EEC</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_2092DCF8693C88684EEC">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_46F9833E443C88684EEC">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=f57c00&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1BBAD7BAE03C88684EEC">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_5C334CE8793C88684EEC">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=f57c00&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0ED676D78A3C88684EEC">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1BBAD7BAE03C88684EEC</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2092DCF8693C88684EEC</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="0EA8A21EF73833718864">
+		<name>RST Locations</name>
+		<open>1</open>
+		<styleUrl>#__managed_style_0ED676D78A3C88684EEC</styleUrl>
+		<Placemark id="097B05C55538335E2B3C">
+			<name>Clear Creek RST</name>
+			<LookAt>
+				<longitude>-122.39608</longitude>
+				<latitude>40.50613</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>780.2467395955613</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-122.39608,40.50613,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0748D3D9793833600F6E">
+			<name>Battle Creek RST</name>
+			<LookAt>
+				<longitude>-122.14171</longitude>
+				<latitude>40.39788</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>781.622891951374</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-122.14171,40.39788,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0014E4238C383366C73E">
+			<name>Butte Creek RST</name>
+			<LookAt>
+				<longitude>-121.75059</longitude>
+				<latitude>39.70941</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>790.3123627752155</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.75059,39.70941,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="05CB1C416438336784E7">
+			<name>Feather RM61 RST</name>
+			<LookAt>
+				<longitude>-121.61501</longitude>
+				<latitude>39.45628</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>793.479666535314</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.61501,39.45628,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0EEFBBDE6A383368789B">
+			<name>Yuba River RST</name>
+			<LookAt>
+				<longitude>-121.50655</longitude>
+				<latitude>39.18212</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>796.8932255863285</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.50655,39.18212,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0BF8813A99383369F2EC">
+			<name>Tisdale RST</name>
+			<LookAt>
+				<longitude>-121.82948</longitude>
+				<latitude>39.03455</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>798.7233068278125</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.82948,39.03455,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="021B08E24C38336AF32B">
+			<name>Feather RM17 RST</name>
+			<LookAt>
+				<longitude>-121.57924</longitude>
+				<latitude>39.00506</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>799.0884099531366</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.57924,39.00506,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0377B255DC3C88652019">
+			<name>Mill Creek RST</name>
+			<LookAt>
+				<longitude>-122.0324612804193</longitude>
+				<latitude>40.05475508895881</latitude>
+				<altitude>119.7232871356007</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>34.99999153883993</gx:fovy>
+				<range>100.1580438525525</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-122.0323471092375,40.05479740115812,119.3260639942059</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0ED21762CF38336BDF86">
+			<name>Knights Landing RST</name>
+			<LookAt>
+				<longitude>-121.69216</longitude>
+				<latitude>38.79081</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>801.7347727224068</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.69216,38.79081,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="04EF66B4123C8862389C">
+			<name>Deer Creek RST</name>
+			<LookAt>
+				<longitude>-121.961</longitude>
+				<latitude>40.01097</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>786.5196735519276</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.961,40.01097,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="05C3EFEFE738336C6336">
+			<name>Delta Entry RST</name>
+			<LookAt>
+				<longitude>-121.60481</longitude>
+				<latitude>38.72514</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>802.5437330865301</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_3227181B3B3C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.60481,38.72514,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="01804619083833728541">
+		<name>Hatchery Releases</name>
+		<styleUrl>#__managed_style_0ED676D78A3C88684EEC</styleUrl>
+		<Placemark id="03B585A01338345410C9">
+			<name>Battle Creek - CNFH</name>
+			<LookAt>
+				<longitude>-122.1453747</longitude>
+				<latitude>40.3981543</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>781.6194082254166</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-122.1453747,40.3981543,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0796F178DB38345537FC">
+			<name>Sac River - Caldwell Park</name>
+			<LookAt>
+				<longitude>-122.3928939</longitude>
+				<latitude>40.5924279</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>779.147748724518</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-122.3928939,40.5924279,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="04C4E2736C38345622DC">
+			<name>Sac River - Balls Ferry</name>
+			<LookAt>
+				<longitude>-122.1941347</longitude>
+				<latitude>40.4180756</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>781.3663534247743</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-122.1941347,40.4180756,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="029CED2475383456FD64">
+			<name>Sutter Bypass - Sacramento Ave</name>
+			<LookAt>
+				<longitude>-121.6247328</longitude>
+				<latitude>38.9171072</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>800.1760958846003</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.6247328,38.9171072,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="00C4D64A693834581E09">
+			<name>Feather River - Boyd&apos;s Pump Boat Launch</name>
+			<LookAt>
+				<longitude>-121.6103626845666</longitude>
+				<latitude>39.05711398833292</latitude>
+				<altitude>9.064659951240962</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>416.7239654489094</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-121.6105013627474,39.05711971618341,9.250720953739716</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="001CC1456B38345A3906">
+			<name>Feather River - Gridley Boat Launch</name>
+			<LookAt>
+				<longitude>-121.640428145221</longitude>
+				<latitude>39.37377832665442</latitude>
+				<altitude>22.56967084398278</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>560.6660358024237</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-121.6405799717299,39.37404239814145,21.73655351613274</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0C0A16C40838345AF339">
+			<name>Sac River - Butte City Boat Launch</name>
+			<LookAt>
+				<longitude>-121.9925924712708</longitude>
+				<latitude>39.46431572397935</latitude>
+				<altitude>22.5045510019722</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>655.8082269663282</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-121.9933088836546,39.46432837410085,21.11846918998117</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="03387D9EC538345CF501">
+			<name>Feather River - Thermalito Outlet Boat Launch</name>
+			<LookAt>
+				<longitude>-121.6326811831116</longitude>
+				<latitude>39.45629801742552</latitude>
+				<altitude>36.3390273034736</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>388.995027258061</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-121.6326479313993,39.45622634442368,36.37376206248717</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="08E74EE64638345D8EF7">
+			<name>Sac River - Turtle Bay Boat Launch</name>
+			<LookAt>
+				<longitude>-122.3832630774099</longitude>
+				<latitude>40.59114579997534</latitude>
+				<altitude>144.0738109073391</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>224.0438305632779</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-122.3833653167526,40.59127704439309,144.0737601129737</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="059A8DD5D538345E4A01">
+			<name>Sac River - Sycamore Grove Boat Ramp</name>
+			<LookAt>
+				<longitude>-122.1983649027344</longitude>
+				<latitude>40.15358440611756</latitude>
+				<altitude>71.36067798411224</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>628.6736551334616</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-122.198260758835,40.1533161904162,70.84827604169767</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0EB3F2047D38345EB4B0">
+			<name>Sac River - Colusa Boat Ramp</name>
+			<LookAt>
+				<longitude>-122.0124971005278</longitude>
+				<latitude>39.21696100233684</latitude>
+				<altitude>11.11187881263671</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>637.8583351421548</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<coordinates>-122.0116862322682,39.21694871580874,10.9190078724083</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0BB96C7E5C38345F4157">
+			<name>Sac River - Tisdale Boat Launch</name>
+			<LookAt>
+				<longitude>-121.822535</longitude>
+				<latitude>39.0249463</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>798.8422286866376</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_68AF5977683C88684EEC</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<coordinates>-121.822535,39.0249463,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
