@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="edi.2335.1" system="EDI" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+  <access authSystem="https://pasta.edirepository.org/authentication" order="allowFirst" scope="document">
+    <allow>
+      <principal>public</principal>
+      <permission>read</permission>
+    </allow>
+    <allow>
+      <principal>cvpia</principal>
+      <permission>write</permission>
+    </allow>
+  </access>
+  <dataset>
+    <shortName>SRJPE Genetic Identification</shortName>
+    <title>Rapid Genetic Identification of Chinook Salmon Runs for the Central Valley Spring Run Juvenile Production Estimate (SRJPE)</title>
+    <creator>
+      <individualName>
+        <givenName>Sean</givenName>
+        <surName>Canfield</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>sean.canfield@water.ca.gov</electronicMailAddress>
+    </creator>
+    <associatedParty>
+      <individualName>
+        <givenName>Melinda</givenName>
+        <surName>Baerwald</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>melinda.baerwald@water.ca.gov</electronicMailAddress>
+      <role>principal investigator</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Sarah</givenName>
+        <surName>Brown</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>sarah.brown@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Aviva</givenName>
+        <surName>Fiske</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>aviva.fiske@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Ross</givenName>
+        <surName>Harper</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>ross.harper@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Pachia</givenName>
+        <surName>Lee</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>lee.pachia@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Scott</givenName>
+        <surName>Meyer</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>scott.meyer@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Aviva</givenName>
+        <surName>Soll</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>aviva.soll@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Sarah</givenName>
+        <surName>Stinson</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>sarah.stinson@water.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Jeff</givenName>
+        <surName>Rodzen</surName>
+      </individualName>
+      <organizationName>California Department of Fish and Wildlife</organizationName>
+      <electronicMailAddress>jeff.rodzen@wildlife.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <associatedParty>
+      <individualName>
+        <givenName>Joy</givenName>
+        <surName>Gaines</surName>
+      </individualName>
+      <organizationName>California Department of Fish and Wildlife</organizationName>
+      <electronicMailAddress>joy.gaines@wildlife.ca.gov</electronicMailAddress>
+      <role>associate</role>
+    </associatedParty>
+    <pubDate>2026-04-28</pubDate>
+    <abstract>
+      <para>
+        <emphasis>SR-JPE EDI Data Package Abstract</emphasis>
+      </para>
+      <para>
+    The California Central Valley supports four seasonal runs of Chinook
+    salmon (</para>
+      <para>
+        <emphasis>Oncorhynchus tshawytscha</emphasis>
+      </para>
+      <para>): fall, late
+    fall, spring, and winter. Spring-run Chinook have declined
+    substantially due to habitat loss and anthropogenic climate change
+    and are listed as threatened under both the California Endangered
+    Species Act and the federal Endangered Species Act.
+  </para>
+      <para>
+    In 2021, the California Department of Water Resources (DWR) and its
+    partners launched the Spring-Run Juvenile Production Estimate
+    (SRJPE) to meet regulatory requirements for long-term operations of
+    the California State Water Project. The SRJPE estimates the annual
+    abundance of natural-origin spring-run juveniles entering the
+    Sacramento-San Joaquin Delta during outmigration.
+  </para>
+      <para>
+    Accurate run identification is critical to this effort and is
+    achieved using two genetic approaches: CRISPR-based SHERLOCK
+    (Specific High-sensitivity Enzymatic Reporter unLOCKing) and
+    genotyping-in-thousands by sequencing (GT-seq).
+  </para>
+      <para>
+    This EDI data package provides genetic run assignments for
+    outmigrating juvenile Chinook salmon collected at 11 sites across
+    the Sacramento River Basin from water years 2022–2026. Associated
+    data include capture date, fork length, and length-at-date
+    (LAD)–based run assignments.
+  </para>
+    </abstract>
+    <keywordSet>
+      <keyword>spring run</keyword>
+      <keyword>fall run</keyword>
+      <keyword>genetic technology</keyword>
+      <keyword>juvenile production estimate</keyword>
+      <keyword>Oncorhynchus tshawytscha</keyword>
+      <keyword>California</keyword>
+      <keyword>Central Valley</keyword>
+      <keyword>SRJPE</keyword>
+      <keyword>Chinook salmon</keyword>
+      <keyword>SHERLOCK</keyword>
+      <keyword>gt-seq</keyword>
+      <keyword>GTseq</keyword>
+      <keyword>Greb1L</keyword>
+      <keyword>genotype</keyword>
+    </keywordSet>
+    <intellectualRights>
+      <para>This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data ("Data User" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available "as is." The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you.</para>
+    </intellectualRights>
+    <licensed>
+      <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+      <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+      <identifier>CC-BY-4.0</identifier>
+    </licensed>
+    <coverage>
+      <geographicCoverage>
+        <geographicDescription>Central Valley</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>-122.5253</westBoundingCoordinate>
+          <eastBoundingCoordinate>-121.3712</eastBoundingCoordinate>
+          <northBoundingCoordinate>40.6556</northBoundingCoordinate>
+          <southBoundingCoordinate>38.5739</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+      <temporalCoverage>
+        <rangeOfDates>
+          <beginDate>
+            <calendarDate>2022-01-01</calendarDate>
+          </beginDate>
+          <endDate>
+            <calendarDate>2025-05-30</calendarDate>
+          </endDate>
+        </rangeOfDates>
+      </temporalCoverage>
+      <taxonomicCoverage>
+        <taxonomicClassification>
+          <taxonRankName>kingdom</taxonRankName>
+          <taxonRankValue>Animalia</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>phylum</taxonRankName>
+            <taxonRankValue>Chordata</taxonRankValue>
+            <taxonomicClassification>
+              <taxonRankName>class</taxonRankName>
+              <taxonRankValue>Teleostei</taxonRankValue>
+              <taxonomicClassification>
+                <taxonRankName>order</taxonRankName>
+                <taxonRankValue>Salmoniformes</taxonRankValue>
+                <taxonomicClassification>
+                  <taxonRankName>family</taxonRankName>
+                  <taxonRankValue>Salmonidae</taxonRankValue>
+                  <taxonomicClassification>
+                    <taxonRankName>genus</taxonRankName>
+                    <taxonRankValue>Oncorhynchus</taxonRankValue>
+                    <taxonomicClassification>
+                      <taxonRankName>species</taxonRankName>
+                      <taxonRankValue>Oncorhynchus tshawytscha</taxonRankValue>
+                      <commonName>Chinook Salmon</commonName>
+                      <taxonId provider="https://itis.gov">161980</taxonId>
+                    </taxonomicClassification>
+                  </taxonomicClassification>
+                </taxonomicClassification>
+              </taxonomicClassification>
+            </taxonomicClassification>
+          </taxonomicClassification>
+        </taxonomicClassification>
+      </taxonomicCoverage>
+    </coverage>
+    <maintenance>
+      <description>ongoing</description>
+      <maintenanceUpdateFrequency>monthly</maintenanceUpdateFrequency>
+    </maintenance>
+    <contact>
+      <individualName>
+        <givenName>Sean</givenName>
+        <surName>Canfield</surName>
+      </individualName>
+      <organizationName>California Department of Water Resources</organizationName>
+      <electronicMailAddress>sean.canfield@water.ca.gov</electronicMailAddress>
+    </contact>
+    <methods>
+      <methodStep>
+        <description>
+          <para>
+    Chinook Salmon Spring-Run Juvenile Production Estimate (JPE) Methods
+  </para>
+          <para>
+            <emphasis>Water Year (WY) 2022</emphasis>
+          </para>
+          <para>
+            <emphasis>Sample Collection</emphasis>
+          </para>
+          <para>
+    Juvenile Chinook salmon were captured at rotary screw-traps (RSTs)
+    positioned at 10 sites throughout the Sacramento River Basin from
+    January 2022 until May 2022. Date of capture was documented and
+    fork-length (millimeters) measured for each fish. Mucus samples for
+    genetic analysis were collected by running a sterile Rayon-tipped
+    swab along the lateral surface above the lateral line 5-15 times.
+    Swabs were then dipped and swirled into a 1.5 mL microcentrifuge
+    tube containing 1x Phosphate Buffered Saline (PBS) for 5-10 seconds,
+    and the swab was discarded. Fin-clips for genetic analysis were
+    obtained from the upper caudal lobe using sterile dissecting
+    scissors, placed in individually labeled coin envelopes, and allowed
+    to dry. Fish were released following tissue collection.
+  </para>
+          <para>
+            <emphasis>DNA Extraction</emphasis>
+          </para>
+          <para>
+    Mucus samples (in PBS buffer) were not subjected to any further
+    processing before genotyping. DNA was extracted from fin-clips using
+    the Qiagen DNeasy 96 Blood and Tissue Kit according to the
+    manufacturer’s instructions (Qiagen, Hilden, Germany).
+  </para>
+          <para>
+            <emphasis>SHERLOCK Genotyping</emphasis>
+          </para>
+          <para>
+    Mucus samples were subjected to SHERLOCK genotyping assays described
+    by Baerwald et al. (2023). First, individuals were genotyped at a
+    portion of the </para>
+          <para>
+            <emphasis>Greb1L</emphasis>
+          </para>
+          <para> locus on chromosome 28
+    (Ots28) to determine whether they were early-migrating (spring or
+    winter adult return migration timing) or late-migrating (fall or
+    late-fall adult return migration timing) (Prince et al., 2017;
+    Thompson et al., 2020). Salmon with early-migrating genotypes were
+    subjected to subsequent SHERLOCK assays targeting loci on chromosome
+    16 (Ots16) to differentiate spring-run and winter-run individuals.
+  </para>
+          <para>
+            <emphasis>GT-seq Genotyping</emphasis>
+          </para>
+          <para>
+    Genotyping-in-thousands by sequencing (GT-seq; Campbell et al.,
+    2015) was performed on fin-clip extracted DNA from all sampled
+    individuals. Individuals were genotyped using the “Transition
+    panel,” an early version of the panel described by Anderson et al.
+    (2025). This panel consists of genetic markers specifically selected
+    to differentiate run types within the California Central Valley. The
+    Transition panel includes seven markers linked to
+    </para>
+          <para> and 201 additional markers distributed
+    throughout the Chinook salmon genome.
+  </para>
+          <para>
+    Early- vs. late-migration phenotypes were inferred by analyzing the
+    set of seven genetic markers associated with the
+    </para>
+          <para> locus using the program STRUCTURE
+    (Pritchard et al., 2000). Individuals identified as early-migrating
+    were assigned to either spring- or winter-run populations, and all
+    individuals (regardless of early vs. late migration genotype) were
+    assigned to one of the four Central Valley populations – fall,
+    late-fall, spring, or winter – using the full suite of genetic
+    markers in the R package </para>
+          <para>
+            <emphasis>RUBIAS</emphasis>
+          </para>
+          <para> v 0.3.4 (Moran
+    and Anderson, 2019).
+  </para>
+          <para>
+    Individuals did not receive an early- or late-migration assignment
+    if more than five out of seven </para>
+          <para> loci were
+    missing from the final genotype dataset. Likewise, individuals did
+    not receive population-level assignments if more than 80% of the
+    remaining loci (greater than 160 out of 201 loci) were missing from
+    the final genotype dataset.
+  </para>
+          <para>
+            <emphasis>Final Run Assignment</emphasis>
+          </para>
+          <para>
+    Final run assignments were made with consideration to both SHERLOCK
+    and GT-seq genotyping results. Individuals determined to be
+    late-migrating according to </para>
+          <para> were
+    assigned to a “Fall or Late-Fall” run grouped category. Individuals
+    determined to be early-migrating were assigned to either Spring or
+    Winter runs based on subsequent SHERLOCK assays and/or population
+    assignment in RUBIAS. In the event of disagreement between SHERLOCK
+    and GT-seq with respect to </para>
+          <para> assignments
+    (e.g., an individual was determined to be late-migrating via
+    SHERLOCK and early-migrating via GT-seq), the GT-seq
+    </para>
+          <para> assignment was used.
+  </para>
+          <para>
+    Individuals that displayed a heterozygous genotype at
+    </para>
+          <para> loci (i.e., displayed genotypes
+    characteristic of both early- and late-migrating populations) were
+    assigned to the run associated with the highest posterior
+    probability reported by RUBIAS. If the highest posterior probability
+    was less than 0.80, or if no RUBIAS assignment was available,
+    </para>
+          <para> heterozygous individuals received a
+    final call of “GREB1L_HETEROZYGOTE.”
+  </para>
+          <para>
+    Individuals were removed from the final dataset if any of the
+    following conditions were met: 1) No </para>
+          <para>
+    assignment (SHERLOCK or GT-seq), 2) Population assignment (RUBIAS)
+    with no GT-seq Greb1L assignment and indeterminate SHERLOCK
+    assignment, 3) </para>
+          <para> early-migration
+    assignment with no (or indeterminate) Ots16 SHERLOCK result and no
+    population assignment (RUBIAS), 4) SHERLOCK
+    </para>
+          <para> heterozygote assignment with no GT-seq
+    </para>
+          <para> assignment, and 5) No recorded capture
+    date or length measurement.
+  </para>
+          <para>
+            <emphasis>Water Year (WY) 2023</emphasis>
+          </para>
+          <para>
+    Juvenile Chinook salmon were captured at rotary screw-traps (RSTs)
+    positioned at 11 sites throughout the Sacramento River Basin from
+    November 2022 until May 2023. Date of capture was documented and
+    fork-length (millimeters) measured for each fish. Mucus samples for
+    genetic analysis were collected by running a sterile Rayon-tipped
+    swab along the lateral surface above the lateral line 2-5 times in
+    the head-to-tail direction. Swabs were then dipped and swirled into
+    a 1.5 mL microcentrifuge tube containing 1x Phosphate Buffered
+    Saline (PBS) or Low-EDTA Tris-HCl (pH 8.0) for 5-10 seconds, and the
+    swab was discarded. Fin-clips for genetic analysis were obtained
+    from the upper caudal lobe using sterile dissecting scissors, placed
+    in individually labeled coin envelopes, and allowed to dry. Fish
+    were released following tissue collection.
+  </para>
+          <para>
+    Mucus samples (in PBS or Low-EDTA Tris-HCl buffer) were incubated at
+    95°C for 15-20 minutes and subsequently cooled to 4°C prior to
+    genotyping. DNA was extracted from fin-clips using the Qiagen DNeasy
+    96 Blood and Tissue Kit according to the manufacturer’s instructions
+    (Qiagen, Hilden, Germany).
+  </para>
+          <para>
+    A randomly-selected subset of mucus samples from each site was
+    subjected to SHERLOCK genotyping assays described by Baerwald et al.
+    (2023). First, individuals were genotyped at a portion of the
+    </para>
+          <para> locus on chromosome 28 (Ots28) to
+    determine whether they were early-migrating (spring or winter adult
+    return migration timing) or late-migrating (fall or late-fall adult
+    return migration timing) (Prince et al., 2017; Thompson et al.,
+    2020). Salmon with early-migrating genotypes were subjected to
+    subsequent SHERLOCK assays targeting loci on chromosome 16 (Ots16)
+    to differentiate spring-run and winter-run individuals.
+  </para>
+          <para> heterozygous individuals received a
+    final call of “UNKNOWN.”
+  </para>
+          <para> assignment, and 5) No recorded capture
+    date or length measurement
+  </para>
+          <para>
+            <emphasis>Water Year (WY) 2024</emphasis>
+          </para>
+          <para>
+    Juvenile Chinook salmon were captured at rotary screw-traps (RSTs)
+    positioned at 11 sites throughout the Sacramento River Basin from
+    November 2023 until May 2024. Date of capture was documented and
+    fork-length (millimeters) measured for each fish. Fin-clips for
+    genetic analysis were obtained from the upper caudal lobe using
+    sterile dissecting scissors and placed in individually labeled 1.5
+    mL microcentrifuge tubes containing 98% Low-EDTA Tris-HCl (pH 8.0)
+    and 2% Proteinase K (20 mg/mL; Qiagen). Fish were released following
+    tissue collection.
+  </para>
+          <para>
+    Microcentrifuge tubes containing Low-EDTA Tris-HCl, Proteinase K,
+    and fin-clips were incubated at 56°C overnight. DNA extracts were
+    then transferred to 96-well PCR plates, and Proteinase K was
+    heat-inactivated via incubation at 95°C for 20 minutes.
+  </para>
+          <para>
+    A randomly-selected subset of samples from each site was subjected
+    to SHERLOCK genotyping assays described by Baerwald et al. (2023).
+    First, individuals were genotyped at a portion of the
+    </para>
+          <para>
+            <emphasis>Water Year (WY) 2025</emphasis>
+          </para>
+          <para>
+    Juvenile Chinook salmon were captured at rotary screw-traps (RSTs)
+    positioned at 11 sites throughout the Sacramento River Basin from
+    November 2024 until May 2025. Date of capture was documented and
+    fork-length (millimeters) measured for each fish. Fin-clips for
+    genetic analysis were obtained from the upper caudal lobe using
+    sterile dissecting scissors and placed in individually labeled 1.5
+    mL microcentrifuge tubes containing 98% Low-EDTA Tris-HCl (pH 8.0)
+    and 2% Proteinase K (20 mg/mL; Qiagen). Fish were released following
+    tissue collection.
+  </para>
+          <para>
+    All samples were subjected to SHERLOCK genotyping assays described
+    by Baerwald et al. (2023). First, individuals were genotyped at a
+    portion of the </para>
+          <para> locus on chromosome 28
+    (Ots28) to determine whether they were early-migrating (spring or
+    winter adult return migration timing) or late-migrating (fall or
+    late-fall adult return migration timing) (Prince et al., 2017;
+    Thompson et al., 2020). Salmon with early-migrating genotypes
+    (except those from Tisdale (TIS), Knights Landing (KNL), and Delta
+    Entry (DEL)) were subjected to subsequent SHERLOCK assays targeting
+    loci on chromosome 16 (Ots16) to differentiate spring-run and
+    winter-run individuals.
+  </para>
+          <para>
+    Following SHERLOCK genotyping, genotyping-in-thousands by sequencing
+    (GT-seq; Campbell et al., 2015) was performed on fin-clip extracted
+    DNA from individuals meeting any of the following criteria: 1) Ots28
+    (</para>
+          <para>) homozygous early from TIS, KNL, or
+    DEL, 2) Ots28 (</para>
+          <para>) heterozygous early/late,
+    3) Ots16 positive for both spring and winter variants.
+  </para>
+          <para>
+    Individuals were genotyped using the Anderson panel (Anderson et
+    al., 2025). This panel consists of genetic markers specifically
+    selected to differentiate run types within the California Central
+    Valley. The Anderson panel includes nine markers linked to
+    </para>
+          <para> and 197 additional markers distributed
+    throughout the Chinook salmon genome.
+  </para>
+          <para> locus using a custom script in R v4.4.1
+    (R Core Team, 2024). Individuals identified as early-migrating were
+    assigned to either spring- or winter-run populations, and all
+    individuals (regardless of early vs. late migration genotype) were
+    assigned to one of the four Central Valley populations – fall,
+    late-fall, spring, or winter – using the full suite of genetic
+    markers in the R package </para>
+          <para>
+    Individuals did not receive an early- or late-migration assignment
+    if more than three out of nine </para>
+          <para> loci were
+    missing from the final genotype dataset. Likewise, individuals did
+    not receive population-level assignments if more than 80% of the
+    remaining loci (greater than 157 out of 197 loci) were missing from
+    the final genotype dataset.
+  </para>
+          <para>
+            <emphasis>Water Year (WY) 2026</emphasis>
+          </para>
+          <para>
+    Juvenile Chinook salmon were captured at rotary screw-traps (RSTs)
+    positioned at 11 sites throughout the Sacramento River Basin from
+    November 2025 until May 2026. Date of capture was documented and
+    fork-length (millimeters) measured for each fish. Fin-clips for
+    genetic analysis were obtained from the upper caudal lobe using
+    sterile dissecting scissors and placed in individually labeled 1.5
+    mL microcentrifuge tubes containing 98% Low-EDTA Tris-HCl (pH 8.0)
+    and 2% Proteinase K (20 mg/mL; Qiagen). A subset of fin-clip samples
+    from CLR, F17, F61, and YUR were affixed to strips of Whatman filter
+    paper, placed in a 1.5 mL microcentrifuge tube with no buffer, and
+    allowed to dry. Fish were released following tissue collection.
+  </para>
+          <para>
+    Microcentrifuge tubes containing Low-EDTA Tris-HCl, Proteinase K,
+    and fin-clips were incubated at 56°C overnight. Digestion buffer
+    (200 µL of 98% Low-EDTA Tris-HCl and 2% Proteinase K) was added to
+    dry-preserved samples prior to incubation. DNA extracts were then
+    transferred to 96-well PCR plates, and Proteinase K was
+    heat-inactivated via incubation at 95°C for 20 minutes.
+  </para>
+          <para> locus on chromosome 28
+    (Ots28) to determine whether they were early-migrating (spring or
+    winter adult return migration timing) or late-migrating (fall or
+    late-fall adult return migration timing) (Prince et al., 2017;
+    Thompson et al., 2020).
+  </para>
+          <para>
+    Following SHERLOCK genotyping, genotyping-in-thousands by sequencing
+    (GT-seq; Campbell et al., 2015) was performed on fin-clip extracted
+    DNA from individuals meeting either of the following criteria: 1)
+    Ots28 (</para>
+          <para>) homozygous early or 2) Ots28
+    (</para>
+          <para>) heterozygous early/late.
+  </para>
+          <para>
+    Citations
+  </para>
+          <para>
+    Anderson, E.C., Clemento, A.J., Campbell, M.A., Pearse, D.E.,
+    Beulke, A.K., Columbus, C., Campbell, E., Thompson, N.F., Garza,
+    J.C. (2025) A multipurpose microhaplotype panel for genetic analysis
+    of California Chinook salmon. bioRxiv [Preprint].
+    https://doi.org/10.1101/2024.12.31.63093
+  </para>
+          <para>
+    Baerwald, M. R., Funk, E. C., Goodbla, A. M., Campbell, M. A.,
+    Thompson, T., Meek, M. H., Schreier, A. D. (2023) Rapid
+    CRISPR‐Cas13a genetic identification enables new opportunities for
+    listed Chinook salmon management. Molecular Ecology Resources.
+    https://doi.org/10.1111/1755-0998.13777
+  </para>
+          <para>
+    Campbell, N. R., Harmon, S. A., Narum, S. R. (2015)
+    Genotyping‐in‐Thousands by sequencing (GT‐seq): A cost effective SNP
+    genotyping method based on custom amplicon sequencing. Molecular
+    Ecology Resources. https://doi.org/10.1111/1755-0998.12357
+  </para>
+          <para>
+    Moran BM, Anderson EC (2019) Bayesian inference from the conditional
+    genetic stock identification model. Canadian Journal of Fisheries
+    and Aquatic Sciences. https://doi.org/10.1139/cjfas-2018-0016
+  </para>
+          <para>
+    Prince, D. J., O’Rourke, S. M., Thompson, T. Q., Ali, O. A., Lyman,
+    H. S., Saglam, I. K., Hotaling, T.J., Spidle, A.P., Miller, M. R.
+    (2017) The evolutionary basis of premature migration in Pacific
+    salmon highlights the utility of genomics for informing
+    conservation. Science Advances.
+    https://doi.org/10.1126/sciadv.1603198
+  </para>
+          <para>
+    Pritchard JK, Stephens M, Donnelly P (2000) Inference of population
+    structure using multilocus genotype data. Genetics.
+    https://doi.org/10.1093/genetics/155.2.945
+  </para>
+          <para>
+    R Core Team (2024) R: A language and environment for statistical
+    computing. R Foundation for Statistical Computing, Vienna, Austria.
+    https://www.R-project.org/.
+  </para>
+          <para>
+    Thompson, N. F., Anderson, E. C., Clemento, A. J., Campbell, M. A.,
+    Pearse, D. E., Hearsey, J. W., Kinziger, A.P., Garza, J. C. (2020) A
+    complex phenotype in salmon controlled by a simple change in
+    migratory timing. Science. https://doi.org/10.1126/science.aba9059
+  </para>
+        </description>
+      </methodStep>
+    </methods>
+    <project>
+      <title>Rapid Genetic Identification of Chinook Salmon Runs for the Central Valley Spring Run Juvenile Production Estimate (SRJPE)</title>
+      <personnel>
+        <individualName>
+          <givenName>Sean</givenName>
+          <surName>Canfield</surName>
+        </individualName>
+        <organizationName>California Department of Water Resources</organizationName>
+        <electronicMailAddress>sean.canfield@water.ca.gov</electronicMailAddress>
+        <role>Project Lead</role>
+      </personnel>
+    </project>
+    <dataTable>
+      <entityName>genetic_identification_data.csv</entityName>
+      <entityDescription>Results</entityDescription>
+      <physical>
+        <objectName>genetic_identification_data.csv</objectName>
+        <size unit="bytes">999013</size>
+        <authentication method="MD5">f23c99e7eb9008a3a8c49f333576b1c2</authentication>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <recordDelimiter>\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+        <distribution>
+          <online>
+            <url function="download">https://raw.githubusercontent.com/SRJPE/jpe-genetics-edi/main/create_xml_R/data/genetic_identification_data.csv</url>
+          </online>
+        </distribution>
+      </physical>
+      <attributeList>
+        <attribute>
+          <attributeName>sample_id</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Unique identifier of the sample processed. Composed of location code, season, sample event, sample bin (size class), and sample number separated by an underscore.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Unique identifier of the sample processed. Composed of location code, season, sample event, sample bin (size class), and sample number separated by an underscore.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>datetime_collected</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Date and time of sample collection.</attributeDefinition>
+          <measurementScale>
+            <dateTime>
+              <formatString>YYYY-MM-DD hh:mm:ss</formatString>
+              <dateTimeDomain>
+                <bounds>
+                  <minimum exclusive="false">2022-01-10 09:30:00</minimum>
+                  <maximum exclusive="false">2025-05-11 12:35:00</maximum>
+                </bounds>
+              </dateTimeDomain>
+            </dateTime>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>fork_length_mm</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Fork length in millimeters of the fish sampled.</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>millimeter</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">23</minimum>
+                  <maximum exclusive="false">176</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>field_run_type</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Run type as assigned in the field using length-at-date. Levels = FALL, LATEFALL, SPRING, WINTER, UNKNOWN, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Run type as assigned in the field using length-at-date. Levels = FALL, LATEFALL, SPRING, WINTER, UNKNOWN, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>final_run_designation</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Final run type as assigned via combined SHERLOCK and GT-seq analysis. Levels = FALL OR LATE FALL, SPRING, GREB1L HETEROZYGOTE, WINTER.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Final run type as assigned via combined SHERLOCK and GT-seq analysis. Levels = FALL OR LATE FALL, SPRING, GREB1L HETEROZYGOTE, WINTER.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>shlk_chr28_genotype</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>SHERLOCK Greb1L (OTS28) genotype result. Levels = EARLY, LATE, HETEROZYGOTE, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>SHERLOCK Greb1L (OTS28) genotype result. Levels = EARLY, LATE, HETEROZYGOTE, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>shlk_chr16_genotype</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>SHERLOCK OTS16 genotype result. Levels = SPRING, WINTER, INDETERMINATE, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>SHERLOCK OTS16 genotype result. Levels = SPRING, WINTER, INDETERMINATE, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>shlk_run_designation</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Run designation from SHERLOCK genetic assays and logic. Levels = SPRING, EARLY/LATE HETEROZYGOUS, SPRING/WINTER, FALL/LATEFALL, WINTER, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Run designation from SHERLOCK genetic assays and logic. Levels = SPRING, EARLY/LATE HETEROZYGOUS, SPRING/WINTER, FALL/LATEFALL, WINTER, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>gtseq_chr28_geno</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>GT-seq Greb1L genotype. Levels = EARLY, LATE, HETEROZYGOTE, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>GT-seq Greb1L genotype. Levels = EARLY, LATE, HETEROZYGOTE, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>pop_structure_id</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Central Valley salmonid population structure. Levels = FALL, LATEFALL, SPRING, WINTER, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Central Valley salmonid population structure. Levels = FALL, LATEFALL, SPRING, WINTER, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>cv_fall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Summed PofZ (posterior assignment probability) of the Central Valley Fall reporting unit</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>cv_late_fall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Summed PofZ (posterior assignment probability) of the Central Valley Late Fall reporting unit</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>cv_spring</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Summed PofZ (posterior assignment probability) of the Central Valley Spring reporting unit</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>cv_winter</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Summed PofZ (posterior assignment probability) of the Central Valley (Sac) Winter reporting unit</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>tributary</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>Spring run tributary assignment. Levels = ButteSp, Feather River Lineage Spring, MillDeerSp, NA.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Spring run tributary assignment. Levels = ButteSp, Feather River Lineage Spring, MillDeerSp, NA.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>buttefall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Butte River Fall</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>frh_fall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Feather River Hatchery Fall</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>frh_sp</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Feather River Hatchery Spring</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>mill_deer_fall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Mill/Deer Fall</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">0.999</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>san_joaquin_fall</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of San Joaquin Fall</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>butte_sp</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Butte River Spring</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>mill_deer_sp</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Mill/Deer Spring</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>coleman_f</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Coleman Hatchery Fall</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>sac_win</attributeName>
+          <attributeLabel>genetic_identification_data</attributeLabel>
+          <attributeDefinition>PofZ (posterior assignment probability) of Sacramento River Winter</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                  <maximum exclusive="false">1</maximum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+      <numberOfRecords>7477</numberOfRecords>
+    </dataTable>
+  </dataset>
+</eml:eml>
