@@ -5,19 +5,19 @@ library(readxl)
 library(EML)
 
 datatable_metadata <-
-  dplyr::tibble(filepath = c("data/genetics_results.csv"),
-                attribute_info = c("data-raw/metadata/genetics_results_metadata.xlsx"),
-                datatable_description = c("Genetic results"),
+  dplyr::tibble(filepath = c("create_xml_R/data/genetic_identification_data.csv"),
+                attribute_info = c("create_xml_R/data-raw/metadata/genetic_identification_metadata.xlsx"),
+                datatable_description = c("Results"),
                 datatable_url = paste0("https://raw.githubusercontent.com/SRJPE/jpe-genetics-edi/main/data/",
-                                       c("genetics_results.csv")))
+                                       c("genetic_identification_data.csv")))
 
-excel_path <- "data-raw/metadata/genetics_project_metadata.xlsx"
+excel_path <- "create_xml_R/data-raw/metadata/project_metadata.xlsx"
 sheets <- readxl::excel_sheets(excel_path)
 metadata <- lapply(sheets, function(x) readxl::read_excel(excel_path, sheet = x))
 names(metadata) <- sheets
 
-abstract_docx <- "data-raw/metadata/abstract.docx"
-methods_docx <- "data-raw/metadata/methods.md"
+abstract_docx <- "create_xml_R/data-raw/metadata/abstract.docx"
+methods_docx <- "create_xml_R/data-raw/metadata/methods.docx"
 
 #edi_number <- reserve_edi_id(user_id = Sys.getenv("edi_user_id"), password = Sys.getenv("edi_password"))
 edi_number <- "genetics" # placeholder
@@ -46,6 +46,7 @@ dataset <- list() %>%
 
 #unitList <- EML::set_unitList(custom_units)
 
+edi_number <- reserve_edi_id(user_id = Sys.getenv("EDI_USER_ID"), password = Sys.getenv("EDI_PASSWORD"))
 edi_number
 eml <- list(packageId = edi_number,
             system = "EDI",
