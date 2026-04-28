@@ -8,7 +8,7 @@ datatable_metadata <-
   dplyr::tibble(filepath = c("create_xml_R/data/genetic_identification_data.csv"),
                 attribute_info = c("create_xml_R/data-raw/metadata/genetic_identification_metadata.xlsx"),
                 datatable_description = c("Results"),
-                datatable_url = paste0("https://raw.githubusercontent.com/SRJPE/jpe-genetics-edi/main/data/",
+                datatable_url = paste0("https://raw.githubusercontent.com/SRJPE/jpe-genetics-edi/main/create_xml_R/data/",
                                        c("genetic_identification_data.csv")))
 
 excel_path <- "create_xml_R/data-raw/metadata/project_metadata.xlsx"
@@ -20,7 +20,6 @@ abstract_docx <- "create_xml_R/data-raw/metadata/abstract.docx"
 methods_docx <- "create_xml_R/data-raw/metadata/methods.docx"
 
 #edi_number <- reserve_edi_id(user_id = Sys.getenv("edi_user_id"), password = Sys.getenv("edi_password"))
-edi_number <- "genetics" # placeholder
 
 dataset <- list() %>%
   add_pub_date() %>%
@@ -46,8 +45,7 @@ dataset <- list() %>%
 
 #unitList <- EML::set_unitList(custom_units)
 
-edi_number <- reserve_edi_id(user_id = Sys.getenv("EDI_USER_ID"), password = Sys.getenv("EDI_PASSWORD"))
-edi_number
+edi_number <- "edi.2335.1"
 eml <- list(packageId = edi_number,
             system = "EDI",
             access = add_access(),
