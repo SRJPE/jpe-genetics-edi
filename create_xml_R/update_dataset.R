@@ -39,8 +39,6 @@ con <- gr_db_connect()
 db_data <- generate_final_run_assignment(con)$results
 last_date_on_db <- max(db_data$datetime_collected, na.rm = T)
 
-
-
 # re-generate data file ---------------------------------------------------
 # always append - will never be able to recreate 2022-2024 seasons
 # using the database approach
@@ -48,13 +46,15 @@ last_date_on_db <- max(db_data$datetime_collected, na.rm = T)
 if(last_date_on_db > last_date_on_edi) {
   data_to_append <- db_data |> 
     mutate(season = as.numeric(substr(sample_id, 4, 5)),
-           coleman_f = as.numeric(coleman_f)) |> 
+           coleman_f = as.numeric(coleman_f),
+           fork_length_mm = ifelse(sample_id == "F6125_8_A_27", # this was mistyped as 9mm; is 39mm; this is from teams message from Sean 
+                                   39, fork_length_mm)) |> 
     filter(season > 24, 
+           !sample_id == "KNL26_9_A_10", # this had a mistyped fl of 3mm
            !sample_id %in% original_data$sample_id,
            datetime_collected <= as_datetime(Sys.Date())) |> 
     select(-season)
 }
-
 
 new_data_to_upload <- bind_rows(original_data, data_to_append)
 
