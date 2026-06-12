@@ -111,7 +111,7 @@
       <electronicMailAddress>joy.gaines@wildlife.ca.gov</electronicMailAddress>
       <role>associate</role>
     </associatedParty>
-    <pubDate>2026-06-09</pubDate>
+    <pubDate>2026-06-12</pubDate>
     <abstract>
       <para>
         <emphasis>SR-JPE EDI Data Package Abstract</emphasis>
@@ -623,8 +623,8 @@
       <entityDescription>Results</entityDescription>
       <physical>
         <objectName>genetic_identification_data.csv</objectName>
-        <size unit="bytes">1354419</size>
-        <authentication method="MD5">15652bba79a29bd403c1361d1b7682ba</authentication>
+        <size unit="bytes">1354670</size>
+        <authentication method="MD5">2eb5100eeecf2547552701206e3a4d19</authentication>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -684,7 +684,7 @@
               <numericDomain>
                 <numberType>real</numberType>
                 <bounds>
-                  <minimum exclusive="false">3</minimum>
+                  <minimum exclusive="false">23</minimum>
                   <maximum exclusive="false">176</maximum>
                 </bounds>
               </numericDomain>
@@ -1051,7 +1051,7 @@
           </measurementScale>
         </attribute>
       </attributeList>
-      <numberOfRecords>10049</numberOfRecords>
+      <numberOfRecords>10051</numberOfRecords>
     </dataTable>
   </dataset>
 </eml:eml>
